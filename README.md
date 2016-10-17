@@ -1,16 +1,16 @@
-### Download NodeJS
-##### Check to see if it is already installed `npm -v`
+1. Download NodeJS
+* Check to see if it is already installed `npm -v`
 
-### Initialize Node within your working directory `npm init`
-##### Skip over all the settings
+2. Initialize Node within your working directory `npm init`
+* Skip over all the settings
 
-### Download Express `npm install --save express`
+3. Download Express `npm install --save express`
 
-### Create a `server.js` file 
-##### Type initial setup code
-###### Run the contents of this file with node `node server.js`
+4. Create a `server.js` file 
+* Type initial setup code
+* Run the contents of this file with node `node server.js`
 
-### Use Vue.js CDN
-##### Custom script to call Vue object
+5. Use Vue.js CDN
+* Custom script to call Vue object
 
-### Download socket.io `npm install --save socket.io`
+6. Download socket.io `npm install --save socket.io`

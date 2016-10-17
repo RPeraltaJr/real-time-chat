@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            color: #555; 
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .chat {
+            width: 100%;
+        }
+        
+        .chat-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .chat-list li {
+            padding: 10px;
+            font-size: .9em;
+        }
+        
+        .chat-list li:nth-child(odd) {
+            background-color: #F5F5F5;
+        }
+        
+        .chat-input {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
+            border: 3px solid #F5F5F5;
+            font-size: .9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat">
+        <ul class="chat-list">
+            <li v-for="message in messages" track-by="$index">{{ message }}</li>
+        </ul>
+        
+        <input type="text" class="chat-input" v-model="message" v-on:keydown="send" placeholder="Type a message">
+    </div>
+    
+    <!-- Vue.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.14/vue.js"></script>
+    <!-- Socket.io -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.4/socket.io.js"></script>
+    <!-- Custom Script -->
+    <script>
+        
+        var socket = io();
+        
+        // create Vue object
+        new Vue({
+           el: '.chat', 
+            data: {
+                message: '',
+                messages: []
+            },
+            methods: {
+                send: function(e) {
+                    if (e.keyCode !== 13) { // 13 is 'Enter' key
+                        return;
+                    }
+                    // send
+                    socket.emit('message.sent', this.message);
+                    this.message = ""; // clear up input message
+                }
+            },
+            ready: function() {
+                // listen for event
+                socket.on('message', function(message) {
+                    this.messages.push(message); // push into messages array
+                }.bind(this));
+            }
+        });
+        
+    </script>
+</body>
+</html>

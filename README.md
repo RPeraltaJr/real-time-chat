@@ -6,7 +6,7 @@
 
 3. **Download Express `npm install --save express`**
 
-4. **Create a `server.js` file **
+4. **Create a `server.js` file**
   * Type initial setup code
   * Run the contents of this file with node `node server.js`
 
